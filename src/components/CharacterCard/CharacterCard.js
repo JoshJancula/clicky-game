@@ -2,15 +2,13 @@ import React, { Component } from "react";
 import "./CharacterCard.css";
 
 class CharacterCard extends Component  {
-    
     state = {
     clicked: false
   };
-    
+
  // when you click on an image
-    handleClickTrue = event => {
-    
-    if(this.state.clicked === true) {// game is now over
+    handleClickTrue = (event, clicked) => {
+    if(clicked === true) {// game is now over
       // update the display
       this.props.changeDisplayLoser();
       // reset the score
@@ -19,7 +17,7 @@ class CharacterCard extends Component  {
      // update the display
       this.props.changeDisplayCorrect();
       // update the status of "clicked" to true
-      this.setState({ clicked: true });
+      this.props.correctGuess(event);
       // shuffle the images around
       this.props.shuffle();
       // increase the score by one
@@ -32,7 +30,7 @@ class CharacterCard extends Component  {
     render() {
         return (
               <div className="card">
-              <img alt={this.props.id} src={this.props.image} onClick={() => this.handleClickTrue(this.props.id)} />
+              <img alt={this.props.id} src={this.props.image} onClick={() => this.handleClickTrue(this.props.id, this.props.clicked)} />
     </div>
             
             );
